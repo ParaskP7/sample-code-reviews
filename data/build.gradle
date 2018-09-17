@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath deps.plugin.kotlin
         classpath deps.plugin.versions
+        classpath deps.plugin.dexcount
     }
 }
 
@@ -14,8 +15,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 apply from: '../config/gradle/android/android.gradle'
+apply from: '../config/gradle/android/dexcount.gradle'
 apply from: '../config/gradle/dependencies/dependency_updates.gradle'
 
 dependencies {
