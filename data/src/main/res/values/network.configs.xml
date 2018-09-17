@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <integer name="network_timeout">10000</integer>
+
+    <!-- Get Your Guide -->
+    <string name="rest_getyourguide_url">https://www.getyourguide.com/</string>
+    <string name="interceptor_getyourguide_user_agent">GetYourGuide</string>
+
+</resources>

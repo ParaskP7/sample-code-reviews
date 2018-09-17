@@ -3,10 +3,13 @@ package io.petros.reviews.presentation.feature.reviews
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import io.petros.reviews.R
+import io.petros.reviews.domain.model.place.Tour
 import io.petros.reviews.presentation.feature.BaseActivity
 import kotlinx.android.synthetic.main.activity_reviews.*
 
 class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>() {
+
+    private val tour = Tour("berlin-l17", "tempelhof-2-hour-airport-history-tour-berlin-airlift-more-t23776")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,7 @@ class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>() {
     /* DATA LOADING */
 
     private fun loadData() {
-        viewModel.loadReviews()
+        viewModel.loadReviews(tour)
     }
 
     /* CONTRACT */
