@@ -3,9 +3,16 @@ package io.petros.reviews.presentation.di.dagger
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import io.petros.reviews.data.di.dagger.RepositoriesModule
+import io.petros.reviews.data.di.dagger.SchedulersModule
 import io.petros.reviews.presentation.App
 
-@Module
+@Module(
+    includes = [
+        SchedulersModule::class,
+        RepositoriesModule::class
+    ]
+)
 class AppModule {
 
     @Provides
