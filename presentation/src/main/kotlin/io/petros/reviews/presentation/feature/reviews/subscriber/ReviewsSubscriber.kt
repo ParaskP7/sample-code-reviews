@@ -6,7 +6,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
 
 class ReviewsSubscriber(
-    private val reviewsObservable: MutableLiveData<ReviewsResultPage>
+    val reviewsObservable: MutableLiveData<ReviewsResultPage>
 ) : DisposableSingleObserver<ReviewsResultPage>() {
 
     override fun onSuccess(reviews: ReviewsResultPage) {
@@ -16,6 +16,7 @@ class ReviewsSubscriber(
 
     override fun onError(exception: Throwable) {
         Timber.w(exception, "Load reviews error.")
+        reviewsObservable.postValue(null)
     }
 
 }
