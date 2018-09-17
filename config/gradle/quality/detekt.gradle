@@ -1,0 +1,15 @@
+def comma = ","
+
+detekt {
+
+    toolVersion = versions.detekt_plugin
+    input = files("$projectDir")
+    config = files("$project.rootDir/config/quality/detekt.yml")
+    filters = ".*/test/.*" + comma +
+            ".*/robolectricTest/.*" + comma +
+            ".*/androidTest/.*" + comma +
+            ".*/resources/.*"
+    disableDefaultRuleSets = false
+    parallel = true
+
+}
