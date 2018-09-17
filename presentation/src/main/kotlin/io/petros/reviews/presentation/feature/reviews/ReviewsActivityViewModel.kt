@@ -2,6 +2,7 @@ package io.petros.reviews.presentation.feature.reviews
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.support.annotation.VisibleForTesting
 import io.petros.reviews.domain.interactor.review.LoadReviewsUseCase
 import io.petros.reviews.domain.model.place.Tour
 import io.petros.reviews.domain.model.review.ReviewsResultPage
@@ -21,7 +22,8 @@ class ReviewsActivityViewModel @Inject constructor(
         )
     }
 
-    override fun onCleared() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public override fun onCleared() {
         super.onCleared()
         loadReviewsUseCase.dispose()
     }
