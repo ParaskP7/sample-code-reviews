@@ -1,0 +1,20 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url reps.url.gradle }
+    }
+    dependencies {
+        classpath deps.plugin.kotlin
+    }
+}
+
+apply plugin: 'kotlin'
+
+apply from: '../config/gradle/lang/kotlin.gradle'
+
+dependencies {
+    implementation deps.kotlin.jre
+
+    testImplementation deps.test.junit
+}
