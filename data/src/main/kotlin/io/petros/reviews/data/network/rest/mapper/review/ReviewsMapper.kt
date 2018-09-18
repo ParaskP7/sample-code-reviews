@@ -10,7 +10,7 @@ import io.petros.reviews.domain.model.review.ReviewsResultPage
 import io.petros.reviews.domain.toDate
 import timber.log.Timber
 
-class ReviewsMapper {
+class ReviewsMapper { // MIT
 
     companion object {
 

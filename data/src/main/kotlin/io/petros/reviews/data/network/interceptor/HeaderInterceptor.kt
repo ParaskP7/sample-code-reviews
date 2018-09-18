@@ -6,7 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class HeaderInterceptor @Inject constructor(val context: Context) : Interceptor {
+class HeaderInterceptor @Inject constructor(val context: Context) : Interceptor { // MRT
 
     companion object {
 

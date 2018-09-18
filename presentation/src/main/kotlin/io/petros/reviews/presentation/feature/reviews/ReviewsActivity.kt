@@ -12,7 +12,7 @@ import io.petros.reviews.presentation.feature.reviews.list.ReviewsAdapter
 import kotlinx.android.synthetic.main.activity_reviews.*
 
 @Suppress("TooManyFunctions")
-class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>(), InfiniteRecyclerView.Listener {
+class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>(), InfiniteRecyclerView.Listener { // MET
 
     private val tour = Tour(
         "Berlin Tempelhof Airport",
