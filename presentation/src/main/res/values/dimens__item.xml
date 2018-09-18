@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- Review item dimensions and properties. -->
+    <dimen name="item_review_margin">8dp</dimen>
+    <dimen name="item_review_space">8dp</dimen>
+    <dimen name="item_review_radius">2dp</dimen>
+    <dimen name="item_review_elevation">2dp</dimen>
+
+</resources>

@@ -6,6 +6,7 @@ import android.support.annotation.VisibleForTesting
 import io.petros.reviews.domain.interactor.review.LoadReviewsUseCase
 import io.petros.reviews.domain.model.place.Tour
 import io.petros.reviews.domain.model.review.ReviewsResultPage
+import io.petros.reviews.presentation.feature.common.list.adapter.AdapterStatus
 import io.petros.reviews.presentation.feature.reviews.subscriber.ReviewsSubscriber
 import javax.inject.Inject
 
@@ -13,11 +14,13 @@ class ReviewsActivityViewModel @Inject constructor(
     private val loadReviewsUseCase: LoadReviewsUseCase
 ) : ViewModel() {
 
+    val statusObservable = MutableLiveData<AdapterStatus>()
     val reviewsObservable = MutableLiveData<ReviewsResultPage>()
 
     fun loadReviews(tour: Tour) {
+        statusObservable.postValue(AdapterStatus.LOADING)
         loadReviewsUseCase.execute(
-            ReviewsSubscriber(reviewsObservable),
+            ReviewsSubscriber(statusObservable, reviewsObservable),
             LoadReviewsUseCase.Params.with(tour)
         )
     }
