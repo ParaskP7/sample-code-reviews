@@ -70,7 +70,7 @@
                 style="@style/ItemReviewDetailsTextView.Left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 tools:text="Jon - Denmark (couple)"/>
 
             <TextView
@@ -78,7 +78,7 @@
                 style="@style/ItemReviewDetailsTextView.Right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.1"
                 tools:text="(da)"/>
 
         </LinearLayout>
