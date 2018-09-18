@@ -4,4 +4,6 @@
 
     <string name="app_name">Reviews</string>
 
+    <string name="activity_reviews_name">Reviews</string>
+
 </resources>

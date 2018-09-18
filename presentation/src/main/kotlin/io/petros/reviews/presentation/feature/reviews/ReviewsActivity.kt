@@ -4,6 +4,8 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import io.petros.reviews.R
 import io.petros.reviews.domain.model.place.Tour
+import io.petros.reviews.domain.space
+import io.petros.reviews.domain.withParentheses
 import io.petros.reviews.presentation.feature.BaseActivity
 import io.petros.reviews.presentation.feature.common.list.InfiniteRecyclerView
 import io.petros.reviews.presentation.feature.reviews.list.ReviewsAdapter
@@ -12,19 +14,26 @@ import kotlinx.android.synthetic.main.activity_reviews.*
 @Suppress("TooManyFunctions")
 class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>(), InfiniteRecyclerView.Listener {
 
-    private val tour = Tour("berlin-l17", "tempelhof-2-hour-airport-history-tour-berlin-airlift-more-t23776")
+    private val tour = Tour(
+        "Berlin Tempelhof Airport",
+        "berlin-l17",
+        "tempelhof-2-hour-airport-history-tour-berlin-airlift-more-t23776"
+    )
 
     private val adapter = ReviewsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initToolbar()
         initSwipeToRefresh()
         initRecyclerView()
         initObservers()
         loadDataOrRestore()
     }
 
-    /* OBSERVERS */
+    private fun initToolbar() {
+        supportActionBar?.title = getString(R.string.activity_reviews_name) + space() + tour.name.withParentheses()
+    }
 
     private fun initSwipeToRefresh() {
         swipe_refresh.setOnRefreshListener { reloadData() }
@@ -34,6 +43,8 @@ class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>(), InfiniteRecycl
         recycler_view.adapter = adapter
         recycler_view.listener = this
     }
+
+    /* OBSERVERS */
 
     private fun initObservers() {
         observeRefreshStatus()
