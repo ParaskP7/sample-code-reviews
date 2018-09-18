@@ -1,13 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_review_id"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="3731027"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_review_primary_details"
+            style="@style/ItemReviewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/tv_review_title"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_review_rating"
+                style="@style/ItemReviewDetailsTextView.Left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/colorAccent"
+                tools:text="★ ★ ★ ★"/>
+
+            <TextView
+                android:id="@+id/tv_review_date"
+                style="@style/ItemReviewDetailsTextView.Right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:text="September 16, 2018"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_review_title"
+            style="@style/ItemReviewCoreTextView.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_review_message"
+            app:layout_constraintTop_toBottomOf="@id/ll_review_primary_details"
+            tools:text="Spaendende"/>
+
+        <TextView
+            android:id="@+id/tv_review_message"
+            style="@style/ItemReviewCoreTextView.Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/ll_review_secondary_details"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_title"
+            tools:text="Virkelig god og spaendende tur hvor man fik et godt indtryk af hvad den enorme bygningen igennem tiden har vaeret brugt til. God guide som var entusiastisk og med en god billedelig forklaring på tingende. Kan klart anbefale."/>
+
+        <LinearLayout
+            android:id="@+id/ll_review_secondary_details"
+            style="@style/ItemReviewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_message">
+
+            <TextView
+                android:id="@+id/tv_review_reviewer"
+                style="@style/ItemReviewDetailsTextView.Left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:text="Jon - Denmark (couple)"/>
+
+            <TextView
+                android:id="@+id/tv_review_language"
+                style="@style/ItemReviewDetailsTextView.Right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:text="(da)"/>
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
 
 </merge>

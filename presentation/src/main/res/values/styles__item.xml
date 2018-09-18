@@ -23,4 +23,39 @@
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
+    <!-- Review -->
+
+    <style name="ItemReviewLinearLayout">
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="ItemReviewDetailsTextView">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ItemReviewDetailsTextView.Left">
+        <item name="android:gravity">start|center</item>
+    </style>
+
+    <style name="ItemReviewDetailsTextView.Right">
+        <item name="android:gravity">end|center</item>
+    </style>
+
+    <style name="ItemReviewCoreTextView">
+        <item name="android:gravity">start|bottom</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ItemReviewCoreTextView.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemReviewCoreTextView.Message">
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

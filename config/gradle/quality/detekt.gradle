@@ -8,7 +8,9 @@ detekt {
     filters = ".*/test/.*" + comma +
             ".*/robolectricTest/.*" + comma +
             ".*/androidTest/.*" + comma +
-            ".*/resources/.*"
+            ".*/resources/.*" + comma +
+            // Files.
+            ".*/KotlinExtensions.kt"
     disableDefaultRuleSets = false
     parallel = true
 
