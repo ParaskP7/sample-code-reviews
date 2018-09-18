@@ -23,14 +23,14 @@ class ReviewsSubscriberTest {
     private lateinit var testedClass: ReviewsSubscriber
     private val isRefreshingObservableMock = mock<Observer<Boolean>>()
     private val statusObservableMock = mock<Observer<AdapterStatus>>()
-    private val reviewsResultPageObservableMock = mock<Observer<ReviewsResultPage>>()
+    private val reviewsObservableMock = mock<Observer<ReviewsResultPage>>()
 
     @Before
     fun setUp() {
         testedClass = ReviewsSubscriber(MutableLiveData(), MutableLiveData(), MutableLiveData())
         testedClass.isRefreshingObservable.observeForever(isRefreshingObservableMock)
         testedClass.statusObservable.observeForever(statusObservableMock)
-        testedClass.reviewsObservable.observeForever(reviewsResultPageObservableMock)
+        testedClass.reviewsObservable.observeForever(reviewsObservableMock)
     }
 
     @Test
@@ -51,7 +51,7 @@ class ReviewsSubscriberTest {
     fun `When load reviews succeeds, then the reviews result page is posted`() {
         testedClass.onSuccess(reviewsResultPage)
 
-        verify(reviewsResultPageObservableMock).onChanged(reviewsResultPage)
+        verify(reviewsObservableMock).onChanged(reviewsResultPage)
     }
 
     @Test
@@ -72,7 +72,7 @@ class ReviewsSubscriberTest {
     fun `When load reviews fails, then a null reviews result page is posted`() {
         testedClass.onError(Exception())
 
-        verify(reviewsResultPageObservableMock).onChanged(null)
+        verify(reviewsObservableMock).onChanged(null)
     }
 
 }
