@@ -123,22 +123,26 @@ Below is a list of all those ```I WISH I HAD MORE TIME TO DO``` future technical
 6. UI changes during screen rotations.
 7. Other lifecycle related edge case events.
 
-Furthermore, below is a list of all those ```I REALLY WANNA DO, AND WILL DO AT SOME POINT``` future library enhancements:
-1. Replace Dagger with Koin. For more info, see [Koin](https://github.com/InsertKoinIO/koin) ```(A pragmatic lightweight 
+Furthermore, below is a wish list of all those ```I REALLY WANNA DO, AND WILL DO AT SOME POINT``` future architecture 
+and library enhancements:
+1. Enhance MVVM with MVI. To get an understand of MVI and how it applies to MVVM (or MVP), start with this article
+   [MVI](http://hannesdorfmann.com/android/model-view-intent) ```(Model-View_Intent, is an architecture enhancment that 
+   tries to solve the state problem, which most complex application have, especially when the screen complexity grows)```
+2. Replace Dagger with Koin. For more info, see [Koin](https://github.com/InsertKoinIO/koin) ```(A pragmatic lightweight 
    dependency injection framework for Kotlin)```
-2. Replace RxJava with Coroutines. For more info, see [Coroutines](https://kotlinlang.org/docs/reference/coroutines.html) ```
+3. Replace RxJava with Coroutines. For more info, see [Coroutines](https://kotlinlang.org/docs/reference/coroutines.html) ```
    (Coroutines simplify asynchronous programming by putting the complications into libraries. The logic of the program can 
    be expressed sequentially in a coroutine, and the underlying library will figure out the asynchrony for us)```
-3. Replace Manual Navigation with the Navigation Architecture Component. For more info, see 
+4. Replace Manual Navigation with the Navigation Architecture Component. For more info, see 
    [Navigation Architecture Component](https://developer.android.com/topic/libraries/architecture/navigation/) ```(The 
    Navigation Architecture Component simplifies the implementation of navigation in an Android app)```
-4. Replace Manual Pagination with the Paging Architecture Component. For more info, see 
+5. Replace Manual Pagination with the Paging Architecture Component. For more info, see 
    [Paging Architecture Component](https://developer.android.com/topic/libraries/architecture/paging/) ```(The Paging 
    Library makes it easier for you to load data gradually and gracefully within your app's RecyclerView)```
-5. Add Offline Support with Room. For more info, see [Room](https://developer.android.com/topic/libraries/architecture/room) ```
+6. Add Offline Support with Room. For more info, see [Room](https://developer.android.com/topic/libraries/architecture/room) ```
    (The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while 
    harnessing the full power of SQLite)```
-6. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
+7. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
 
 
 **THANK YOU**
