@@ -14,13 +14,19 @@ class ReviewsActivityViewModel @Inject constructor(
     private val loadReviewsUseCase: LoadReviewsUseCase
 ) : ViewModel() {
 
+    val isRefreshingObservable = MutableLiveData<Boolean>()
     val statusObservable = MutableLiveData<AdapterStatus>()
     val reviewsObservable = MutableLiveData<ReviewsResultPage>()
+
+    fun reloadReviews(tour: Tour) {
+        isRefreshingObservable.postValue(true)
+        loadReviews(tour)
+    }
 
     fun loadReviews(tour: Tour) {
         statusObservable.postValue(AdapterStatus.LOADING)
         loadReviewsUseCase.execute(
-            ReviewsSubscriber(statusObservable, reviewsObservable),
+            ReviewsSubscriber(isRefreshingObservable, statusObservable, reviewsObservable),
             LoadReviewsUseCase.Params.with(tour)
         )
     }

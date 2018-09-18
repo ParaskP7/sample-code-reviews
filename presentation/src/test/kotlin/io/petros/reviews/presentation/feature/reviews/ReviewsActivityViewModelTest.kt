@@ -22,13 +22,36 @@ class ReviewsActivityViewModelTest {
     private val tour = provideTour()
 
     private lateinit var testedClass: ReviewsActivityViewModel
+    private val isRefreshingObservableMock = mock<Observer<Boolean>>()
     private val statusObservableMock = mock<Observer<AdapterStatus>>()
     private val loadReviewsUseCaseMock = mock<LoadReviewsUseCase>()
 
     @Before
     fun setUp() {
         testedClass = ReviewsActivityViewModel(loadReviewsUseCaseMock)
+        testedClass.isRefreshingObservable.observeForever(isRefreshingObservableMock)
         testedClass.statusObservable.observeForever(statusObservableMock)
+    }
+
+    @Test
+    fun `When reload reviews is triggered, then the is refreshing true flag is posted`() {
+        testedClass.reloadReviews(tour)
+
+        verify(isRefreshingObservableMock).onChanged(true)
+    }
+
+    @Test
+    fun `When reload reviews is triggered, then a loading status is posted`() {
+        testedClass.reloadReviews(tour)
+
+        verify(statusObservableMock).onChanged(AdapterStatus.LOADING)
+    }
+
+    @Test
+    fun `When reload reviews is triggered, then load reviews use case executes`() {
+        testedClass.reloadReviews(tour)
+
+        verify(loadReviewsUseCaseMock).execute(any(), eq(LoadReviewsUseCase.Params.with(tour)))
     }
 
     @Test

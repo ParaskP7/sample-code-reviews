@@ -7,18 +7,21 @@ import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
 
 class ReviewsSubscriber(
+    val isRefreshingObservable: MutableLiveData<Boolean>,
     val statusObservable: MutableLiveData<AdapterStatus>,
     val reviewsObservable: MutableLiveData<ReviewsResultPage>
 ) : DisposableSingleObserver<ReviewsResultPage>() {
 
     override fun onSuccess(reviews: ReviewsResultPage) {
         Timber.d("Load reviews success. [Reviews: $reviews]")
+        isRefreshingObservable.postValue(false)
         statusObservable.postValue(AdapterStatus.IDLE)
         reviewsObservable.postValue(reviews)
     }
 
     override fun onError(exception: Throwable) {
         Timber.w(exception, "Load reviews error.")
+        isRefreshingObservable.postValue(false)
         statusObservable.postValue(AdapterStatus.ERROR)
         reviewsObservable.postValue(null)
     }

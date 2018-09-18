@@ -21,14 +21,23 @@ class ReviewsSubscriberTest {
     private val reviewsResultPage = provideReviewsResultPage()
 
     private lateinit var testedClass: ReviewsSubscriber
+    private val isRefreshingObservableMock = mock<Observer<Boolean>>()
     private val statusObservableMock = mock<Observer<AdapterStatus>>()
     private val reviewsResultPageObservableMock = mock<Observer<ReviewsResultPage>>()
 
     @Before
     fun setUp() {
-        testedClass = ReviewsSubscriber(MutableLiveData(), MutableLiveData())
+        testedClass = ReviewsSubscriber(MutableLiveData(), MutableLiveData(), MutableLiveData())
+        testedClass.isRefreshingObservable.observeForever(isRefreshingObservableMock)
         testedClass.statusObservable.observeForever(statusObservableMock)
         testedClass.reviewsObservable.observeForever(reviewsResultPageObservableMock)
+    }
+
+    @Test
+    fun `When load reviews succeeds, then the is refreshing false flag is posted`() {
+        testedClass.onSuccess(reviewsResultPage)
+
+        verify(isRefreshingObservableMock).onChanged(false)
     }
 
     @Test
@@ -43,6 +52,13 @@ class ReviewsSubscriberTest {
         testedClass.onSuccess(reviewsResultPage)
 
         verify(reviewsResultPageObservableMock).onChanged(reviewsResultPage)
+    }
+
+    @Test
+    fun `When load reviews fails, then then the is refreshing false flag is posted`() {
+        testedClass.onError(Exception())
+
+        verify(isRefreshingObservableMock).onChanged(false)
     }
 
     @Test
