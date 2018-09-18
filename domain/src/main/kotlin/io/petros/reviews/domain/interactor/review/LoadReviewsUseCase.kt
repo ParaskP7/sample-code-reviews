@@ -14,15 +14,15 @@ class LoadReviewsUseCase @Inject constructor(
 ) : UseCaseSingle<ReviewsResultPage, LoadReviewsUseCase.Params>(rxSchedulers) {
 
     override fun buildUseCaseObservable(params: Params): Single<ReviewsResultPage> {
-        return reviewsRepository.loadReviews(params.tour)
+        return reviewsRepository.loadReviews(params.tour, params.page)
     }
 
-    data class Params constructor(val tour: Tour) {
+    data class Params constructor(val tour: Tour, val page: Int?) {
 
         companion object {
 
-            fun with(tour: Tour): Params {
-                return Params(tour)
+            fun with(tour: Tour, page: Int?): Params {
+                return Params(tour, page)
             }
 
         }

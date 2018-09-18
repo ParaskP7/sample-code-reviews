@@ -5,11 +5,14 @@ import io.petros.reviews.domain.space
 import io.petros.reviews.domain.withParentheses
 
 data class Reviewer(
-    val type: String,
+    val type: String?,
     val name: String,
     val country: String
 ) {
 
-    fun formatted() = name + space() + dash() + space() + country + space() + type.withParentheses()
+    fun formatted(): String {
+        val nameCountry = name + space() + dash() + space() + country
+        return type?.let { nameCountry + space() + it.withParentheses() } ?: nameCountry
+    }
 
 }

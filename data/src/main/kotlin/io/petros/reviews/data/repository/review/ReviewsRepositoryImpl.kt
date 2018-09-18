@@ -11,8 +11,8 @@ class ReviewsRepositoryImpl @Inject constructor(
     private val webService: WebService
 ) : ReviewsRepository {
 
-    override fun loadReviews(tour: Tour): Single<ReviewsResultPage> {
-        return webService.loadReviews(tour)
+    override fun loadReviews(tour: Tour, page: Int?): Single<ReviewsResultPage> {
+        return webService.loadReviews(tour, page)
     }
 
 }

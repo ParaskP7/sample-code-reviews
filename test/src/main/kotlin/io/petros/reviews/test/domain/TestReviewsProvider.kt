@@ -10,6 +10,8 @@ class TestReviewsProvider {
 
     companion object {
 
+        const val NEXT_PAGE = 1
+
         private const val REVIEW_ID = 1
         private const val REVIEW_RATING = 5.0
         private val REVIEW_DATE = GregorianCalendar(2018, Calendar.SEPTEMBER, 18).time
@@ -44,7 +46,7 @@ class TestReviewsProvider {
         }
 
         fun provideReviewer(
-            type: String = REVIEWER_TYPE,
+            type: String? = REVIEWER_TYPE,
             name: String = REVIEWER_NAME,
             country: String = REVIEWER_COUNTRY
         ): Reviewer {
@@ -66,9 +68,11 @@ class TestReviewsProvider {
         }
 
         fun provideReviewsResultPage(
+            nextPage: Int = NEXT_PAGE,
             reviews: List<Review> = arrayListOf(provideReview(), provideReview(), provideReview())
         ): ReviewsResultPage {
             return ReviewsResultPage(
+                nextPage,
                 reviews
             )
         }

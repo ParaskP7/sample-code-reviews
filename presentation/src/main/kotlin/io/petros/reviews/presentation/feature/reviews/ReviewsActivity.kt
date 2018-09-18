@@ -5,11 +5,12 @@ import android.os.Bundle
 import io.petros.reviews.R
 import io.petros.reviews.domain.model.place.Tour
 import io.petros.reviews.presentation.feature.BaseActivity
+import io.petros.reviews.presentation.feature.common.list.InfiniteRecyclerView
 import io.petros.reviews.presentation.feature.reviews.list.ReviewsAdapter
 import kotlinx.android.synthetic.main.activity_reviews.*
 
 @Suppress("TooManyFunctions")
-class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>() {
+class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>(), InfiniteRecyclerView.Listener {
 
     private val tour = Tour("berlin-l17", "tempelhof-2-hour-airport-history-tour-berlin-airlift-more-t23776")
 
@@ -20,7 +21,7 @@ class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>() {
         initSwipeToRefresh()
         initRecyclerView()
         initObservers()
-        loadData()
+        loadDataOrRestore()
     }
 
     /* OBSERVERS */
@@ -31,6 +32,7 @@ class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>() {
 
     private fun initRecyclerView() {
         recycler_view.adapter = adapter
+        recycler_view.listener = this
     }
 
     private fun initObservers() {
@@ -53,18 +55,22 @@ class ReviewsActivity : BaseActivity<ReviewsActivityViewModel>() {
 
     private fun observeReviews() {
         viewModel.reviewsObservable.observe(this, Observer { it ->
-            it?.let { adapter.setItems(it.reviews) }
+            it?.let { adapter.setItems(it) }
         })
     }
 
     /* DATA LOADING */
 
+    override fun loadDataOrRestore() {
+        viewModel.loadReviewsOrRestore(tour)
+    }
+
     private fun reloadData() {
         viewModel.reloadReviews(tour)
     }
 
-    private fun loadData() {
-        viewModel.loadReviews(tour)
+    override fun loadData(page: Int?) {
+        viewModel.loadReviews(tour, page)
     }
 
     /* CONTRACT */

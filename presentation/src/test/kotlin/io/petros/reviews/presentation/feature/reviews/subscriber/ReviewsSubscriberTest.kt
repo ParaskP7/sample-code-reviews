@@ -5,7 +5,8 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import io.petros.reviews.domain.model.review.ReviewsResultPage
+import io.petros.reviews.domain.model.common.PaginationData
+import io.petros.reviews.domain.model.review.Review
 import io.petros.reviews.presentation.feature.common.list.adapter.AdapterStatus
 import io.petros.reviews.test.domain.TestReviewsProvider.Companion.provideReviewsResultPage
 import org.junit.Before
@@ -23,11 +24,11 @@ class ReviewsSubscriberTest {
     private lateinit var testedClass: ReviewsSubscriber
     private val isRefreshingObservableMock = mock<Observer<Boolean>>()
     private val statusObservableMock = mock<Observer<AdapterStatus>>()
-    private val reviewsObservableMock = mock<Observer<ReviewsResultPage>>()
+    private val reviewsObservableMock = mock<Observer<PaginationData<Review>>>()
 
     @Before
     fun setUp() {
-        testedClass = ReviewsSubscriber(MutableLiveData(), MutableLiveData(), MutableLiveData())
+        testedClass = ReviewsSubscriber(MutableLiveData(), MutableLiveData(), MutableLiveData(), PaginationData())
         testedClass.isRefreshingObservable.observeForever(isRefreshingObservableMock)
         testedClass.statusObservable.observeForever(statusObservableMock)
         testedClass.reviewsObservable.observeForever(reviewsObservableMock)
@@ -48,10 +49,10 @@ class ReviewsSubscriberTest {
     }
 
     @Test
-    fun `When load reviews succeeds, then the reviews result page is posted`() {
+    fun `When load reviews succeeds, then the updated reviews pagination data is posted`() {
         testedClass.onSuccess(reviewsResultPage)
 
-        verify(reviewsObservableMock).onChanged(reviewsResultPage)
+        verify(reviewsObservableMock).onChanged(testedClass.paginationData.addPage(reviewsResultPage))
     }
 
     @Test
@@ -69,7 +70,7 @@ class ReviewsSubscriberTest {
     }
 
     @Test
-    fun `When load reviews fails, then a null reviews result page is posted`() {
+    fun `When load reviews fails, then a null reviews pagination data is posted`() {
         testedClass.onError(Exception())
 
         verify(reviewsObservableMock).onChanged(null)

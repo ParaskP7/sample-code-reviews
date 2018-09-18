@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.petros.reviews.domain.repository.review.ReviewsRepository
+import io.petros.reviews.test.domain.TestReviewsProvider.Companion.NEXT_PAGE
 import io.petros.reviews.test.domain.TestReviewsProvider.Companion.provideReviewsResultPage
 import io.petros.reviews.test.domain.TestToursProvider.Companion.provideTour
 import io.petros.reviews.test.reactive.rx.TestRxSchedulersProvider.Companion.provideRxSchedulers
@@ -15,7 +16,7 @@ import org.junit.Test
 class LoadReviewsUseCaseTest {
 
     private val tour = provideTour()
-    private val params = LoadReviewsUseCase.Params.with(tour)
+    private val params = LoadReviewsUseCase.Params.with(tour, NEXT_PAGE)
 
     private val reviewsResultPage = provideReviewsResultPage()
 
@@ -31,12 +32,12 @@ class LoadReviewsUseCaseTest {
     fun `When load reviews use case is build, then reviews repository triggers load reviews`() {
         testedClass.buildUseCaseObservable(params)
 
-        verify(reviewsRepositoryMock).loadReviews(tour)
+        verify(reviewsRepositoryMock).loadReviews(tour, NEXT_PAGE)
     }
 
     @Test
     fun `When load reviews returns, then the reviews result page is the expected one`() {
-        whenever(reviewsRepositoryMock.loadReviews(tour)).thenReturn(Single.just(reviewsResultPage))
+        whenever(reviewsRepositoryMock.loadReviews(tour, NEXT_PAGE)).thenReturn(Single.just(reviewsResultPage))
 
         val result = testedClass.buildUseCaseObservable(params).blockingGet()
 

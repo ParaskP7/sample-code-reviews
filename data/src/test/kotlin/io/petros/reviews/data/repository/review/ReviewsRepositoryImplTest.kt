@@ -3,6 +3,7 @@ package io.petros.reviews.data.repository.review
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import io.petros.reviews.data.network.WebService
+import io.petros.reviews.test.domain.TestReviewsProvider.Companion.NEXT_PAGE
 import io.petros.reviews.test.domain.TestToursProvider.Companion.provideTour
 import org.junit.Before
 import org.junit.Test
@@ -21,9 +22,9 @@ class ReviewsRepositoryImplTest {
 
     @Test
     fun `When load reviews is triggered, then web service triggers load reviews`() {
-        testedClass.loadReviews(tour)
+        testedClass.loadReviews(tour, NEXT_PAGE)
 
-        verify(webServiceMock).loadReviews(tour)
+        verify(webServiceMock).loadReviews(tour, NEXT_PAGE)
     }
 
 }

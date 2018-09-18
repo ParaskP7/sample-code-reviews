@@ -8,17 +8,47 @@ import io.petros.reviews.domain.model.review.Review
 import io.petros.reviews.domain.model.review.Reviewer
 import io.petros.reviews.domain.model.review.ReviewsResultPage
 import io.petros.reviews.domain.toDate
+import timber.log.Timber
 
 class ReviewsMapper {
 
     companion object {
 
-        internal fun transform(reviewsResultPageResponse: ReviewsResultPageResponse): ReviewsResultPage {
+        internal fun transform(
+            reviewsResultPageResponse: ReviewsResultPageResponse,
+            currentPage: Int
+        ): ReviewsResultPage {
+            return when (reviewsResultPageResponse.status) {
+                true -> reviewsResultPage(reviewsResultPageResponse, currentPage)
+                false -> emptyReviewsResultPage(reviewsResultPageResponse)
+            }
+        }
+
+        private fun reviewsResultPage(
+            reviewsResultPageResponse: ReviewsResultPageResponse,
+            currentPage: Int
+        ): ReviewsResultPage {
+            return reviewsResultPageResponse.data?.let {
+                fullReviewsResultPage(it, reviewsResultPageResponse.nextPage(currentPage))
+            } ?: emptyReviewsResultPage(reviewsResultPageResponse)
+        }
+
+        private fun fullReviewsResultPage(
+            data: List<ReviewResponse>,
+            nextPage: Int?
+        ): ReviewsResultPage {
             val reviews = arrayListOf<Review>()
-            for (reviewResponse in reviewsResultPageResponse.data) {
+            for (reviewResponse in data) {
                 reviews.add(reviewResponse.toReview())
             }
-            return ReviewsResultPage(reviews)
+            return ReviewsResultPage(nextPage, reviews)
+        }
+
+        private fun emptyReviewsResultPage(
+            reviewsResultPageResponse: ReviewsResultPageResponse
+        ): ReviewsResultPage {
+            Timber.w("No more data to load. [Message: ${reviewsResultPageResponse.message}]")
+            return ReviewsResultPage(null, emptyList())
         }
 
     }
@@ -30,12 +60,16 @@ private fun ReviewResponse.toReview(): Review {
         id = review_id,
         rating = rating.toDouble(),
         date = date.toDate(REVIEW_DATE_FORMAT),
-        title = if (title.isNotEmpty()) title else null,
-        message = if (message.isNotEmpty()) message else null,
+        title = toTitle(),
+        message = toMessage(),
         reviewer = toReviewer(),
         language = toLanguage()
     )
 }
+
+private fun ReviewResponse.toTitle() = title?.let { if (title.isNotEmpty()) title else null }
+
+private fun ReviewResponse.toMessage() = message?.let { if (message.isNotEmpty()) message else null }
 
 private fun ReviewResponse.toReviewer(): Reviewer {
     return Reviewer(

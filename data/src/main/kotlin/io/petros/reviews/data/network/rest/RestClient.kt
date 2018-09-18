@@ -11,9 +11,9 @@ class RestClient @Inject constructor(
     private val restApi: RestApi
 ) : WebService {
 
-    override fun loadReviews(tour: Tour): Single<ReviewsResultPage> {
-        return restApi.loadReviews(tour.city, tour.place)
-            .map { ReviewsMapper.transform(it) }
+    override fun loadReviews(tour: Tour, page: Int?): Single<ReviewsResultPage> {
+        return restApi.loadReviews(tour.city, tour.place, page)
+            .map { ReviewsMapper.transform(it, page ?: 0) }
     }
 
 }

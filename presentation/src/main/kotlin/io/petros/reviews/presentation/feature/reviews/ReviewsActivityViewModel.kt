@@ -4,8 +4,9 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.VisibleForTesting
 import io.petros.reviews.domain.interactor.review.LoadReviewsUseCase
+import io.petros.reviews.domain.model.common.PaginationData
 import io.petros.reviews.domain.model.place.Tour
-import io.petros.reviews.domain.model.review.ReviewsResultPage
+import io.petros.reviews.domain.model.review.Review
 import io.petros.reviews.presentation.feature.common.list.adapter.AdapterStatus
 import io.petros.reviews.presentation.feature.reviews.subscriber.ReviewsSubscriber
 import javax.inject.Inject
@@ -16,18 +17,25 @@ class ReviewsActivityViewModel @Inject constructor(
 
     val isRefreshingObservable = MutableLiveData<Boolean>()
     val statusObservable = MutableLiveData<AdapterStatus>()
-    val reviewsObservable = MutableLiveData<ReviewsResultPage>()
+    val reviewsObservable = MutableLiveData<PaginationData<Review>>()
+
+    val paginationData = PaginationData<Review>()
+
+    fun loadReviewsOrRestore(tour: Tour) {
+        if (paginationData.isEmpty()) loadReviews(tour) else reviewsObservable.postValue(paginationData)
+    }
 
     fun reloadReviews(tour: Tour) {
         isRefreshingObservable.postValue(true)
+        paginationData.clear()
         loadReviews(tour)
     }
 
-    fun loadReviews(tour: Tour) {
+    fun loadReviews(tour: Tour, page: Int? = null) {
         statusObservable.postValue(AdapterStatus.LOADING)
         loadReviewsUseCase.execute(
-            ReviewsSubscriber(isRefreshingObservable, statusObservable, reviewsObservable),
-            LoadReviewsUseCase.Params.with(tour)
+            ReviewsSubscriber(isRefreshingObservable, statusObservable, reviewsObservable, paginationData),
+            LoadReviewsUseCase.Params.with(tour, page)
         )
     }
 

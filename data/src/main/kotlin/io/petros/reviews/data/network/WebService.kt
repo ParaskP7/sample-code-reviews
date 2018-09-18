@@ -6,6 +6,6 @@ import io.reactivex.Single
 
 interface WebService {
 
-    fun loadReviews(tour: Tour): Single<ReviewsResultPage>
+    fun loadReviews(tour: Tour, page: Int?): Single<ReviewsResultPage>
 
 }

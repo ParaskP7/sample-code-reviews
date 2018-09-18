@@ -9,12 +9,18 @@ import retrofit2.http.Query
 @Suppress("LongParameterList")
 interface RestApi {
 
+    companion object {
+
+        const val REVIEWS_COUNT = 20
+
+    }
+
     @GET("{city}/{place}/reviews.json")
     fun loadReviews(
         @Path("city") city: String,
         @Path("place") place: String,
-        @Query("page") page: Int = 0,
-        @Query("count") count: Int = 5,
+        @Query("page") page: Int? = null,
+        @Query("count") count: Int = REVIEWS_COUNT,
         @Query("rating") rating: Int = 0,
         @Query("sortBy") sortBy: String = "date_of_review",
         @Query("direction") direction: String = "DESC"
