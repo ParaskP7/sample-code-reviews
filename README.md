@@ -142,7 +142,9 @@ and library enhancements:
 6. Add Offline Support with Room. For more info, see [Room](https://developer.android.com/topic/libraries/architecture/room) ```
    (The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while 
    harnessing the full power of SQLite)```
-7. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
+7. Upgrade JUnit4 to SPEK Framework and JUnit5. For more info, see [SPEK](https://spekframework.org/) ```(A specification 
+   framework for Kotlin)``` and [JUnit5](https://junit.org/junit5/) ```(JUnit 5 is the next generation of JUnit)```
+8. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
 
 
 **THANK YOU**
