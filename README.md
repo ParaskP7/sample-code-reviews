@@ -144,7 +144,9 @@ and library enhancements:
    harnessing the full power of SQLite)```
 7. Upgrade JUnit4 to SPEK Framework and JUnit5. For more info, see [SPEK](https://spekframework.org/) ```(A specification 
    framework for Kotlin)``` and [JUnit5](https://junit.org/junit5/) ```(JUnit 5 is the next generation of JUnit)```
-8. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
+8. Replace Gradle Groovy with Kotlin DSL. For more info, see [Gradle Kotlin DSL](https://github.com/gradle/kotlin-dsl) ```
+   (Kotlin language support for Gradle build scripts)```
+9. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
 
 
 **THANK YOU**
