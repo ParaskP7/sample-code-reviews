@@ -146,7 +146,10 @@ and library enhancements:
    framework for Kotlin)``` and [JUnit5](https://junit.org/junit5/) ```(JUnit 5 is the next generation of JUnit)```
 8. Replace Gradle Groovy with Kotlin DSL. For more info, see [Gradle Kotlin DSL](https://github.com/gradle/kotlin-dsl) ```
    (Kotlin language support for Gradle build scripts)```
-9. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
+9. Replace Manual Android Extensions with Android KTX. For more info, see 
+   [Android KTX](https://developer.android.com/kotlin/ktx) ```(Android KTX is a set of Kotlin extensions that is part of the 
+   Android Jetpack family)```
+10. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
 
 
 **THANK YOU**
