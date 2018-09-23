@@ -149,7 +149,11 @@ and library enhancements:
 9. Replace Manual Android Extensions with Android KTX. For more info, see 
    [Android KTX](https://developer.android.com/kotlin/ktx) ```(Android KTX is a set of Kotlin extensions that is part of the 
    Android Jetpack family)```
-10. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
+10. Replace current package structure to the new AndroidX package structure. For more info, see 
+    [AndroidX](https://developer.android.com/topic/libraries/support-library/androidx-overview) ```(A new package structure 
+    to make it clearer which packages are bundled with the Android operating system, and which are packaged with your app's 
+    APK)```
+11. Last but not least, convert the whole thing to [Flutter](https://flutter.io/)! ```JUST KIDDING 😛 ...OR AM I!```
 
 
 **THANK YOU**
